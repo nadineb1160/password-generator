@@ -1,32 +1,35 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
-// Copy button 
+// Copy button - added to assignment code
 var copyBtn = document.querySelector("#copy");
 
 
 // Write password to the #password input
 function writePassword() {
+  // Generate password string
   var password = generatePassword();
+  // Locate password text in document
   var passwordText = document.querySelector("#password");
-
+  // Assign password text the password generated
   passwordText.value = password;
+}
+
+// Copy password to clipboard
+function copyPassword() {
+  // Get password element to copy
+  var passwordCopy = document.getElementById("password");
+  // Select text to have copied
+  passwordCopy.select();
+  // Execuate copy command
+  document.execCommand("copy");
+  // Alert user that password is copied
+  alert("Password copied to clipboard");
 }
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
+// Add event listener to copy button
 copyBtn.addEventListener("click", copyPassword);
-
-
-// Copy password to clipboard
-function copyPassword() {
-  var passwordCopy = document.getElementById("password");
-  console.log(passwordCopy);
-  passwordCopy.select();
-
-  document.execCommand("copy");
-
-  alert("Password copied to clipboard");
-}
 
 
 // Global Variables Declared
@@ -37,11 +40,11 @@ var specialChar;
 var passwordLength;
 
 
-// Prompt Users for password criteria 
+// Prompt user for password criteria 
 function promptUser() {
 
   // Prompt the user for password length
-  passwordLength = prompt("What length password would you like?")
+  passwordLength = prompt("What length password would you like?");
 
   // Continue to prompt user until requirement is met
   // Length of at least 8 characters and no more than 128 characters
@@ -56,14 +59,12 @@ function promptUser() {
   numeric = confirm("Would like numeric characters?");
   specialChar = confirm("Would like specialChar characters?");
 
-
   // If no character type selected
   if (lowerCase === false && upperCase === false && 
     numeric === false && specialChar === false) {
       // Continue to prompt user until at least one type valid
       promptUser();
     }
-
 }
 
 
@@ -72,16 +73,15 @@ var lowerCaseLetters = "abcdefghijklmnopqrstuvwxyz";
 var upperCaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 var specialCharLetters = "~!@#$%^&*?_<>+{}";
 
-
 // Arrays with different charater types
 var lowerCaseArray = lowerCaseLetters.split("");
 var upperCaseArray = upperCaseLetters.split("");
 var numericArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 var specialCharArray =  specialCharLetters.split("");
 
-
 // Valid character Array - nested [["upperArray"],["lowerArray"]]
 var validChar = [];
+
 
 // Check prompts to see which types are valid
 function checkPrompts() {
@@ -104,17 +104,20 @@ function checkPrompts() {
   }
 }
 
+
 // Generates the type of digit - "lowerCase" "numeric"
 function generateRandomType() {
   // generate a number between 0 and validChar length
   return Math.floor(Math.random() * validChar.length);
 }
 
+
 // Generates the char in type array - "k" 9
 function generateRandomChar(typeIdx) {
   // generate a number between 0 and typeIdx array length
   return Math.floor(Math.random() * validChar[typeIdx].length);
 }
+
 
 // Make password using valid characters in validChar
 function makePassword() {
@@ -140,10 +143,10 @@ function makePassword() {
     password.push(randomChar);
 
   }
-
   // Join password letters together
   return password.join("");
 }
+
 
 // Generate the password 
 function generatePassword() {
@@ -153,15 +156,9 @@ function generatePassword() {
   // Check which prompts are valid, pushes valid arrays to validChar
   checkPrompts();
 
-  // Make password based on availablle characters in validChar
+  // Make password based on available characters in validChar
   var pass = makePassword();
 
-  // Return Password
-  // console.log for now
+  // Return password to write to #password
   return pass;
 }
-
-
-// THEN a password is generated that matches the selected criteria
-// WHEN the password is generated
-// THEN the password is either displayed in an alert or written to the page
