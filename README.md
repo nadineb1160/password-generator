@@ -29,7 +29,9 @@ The following image demonstrates the application functionality:
 ![password generator demo](./Assets/03-hw-demo.png)
 
 #
+
 ## How it generates a password:
+
 There is a nested array that holds character-type arrays (ex. numeric = [0,1,2,..]) based on what the user wants in the password.
 
 In generateRandomType(), I randomly generate a number that represents one of these valid arrays. Then in generateRandomChar(), I randomly generate a number for the index of that type. 
