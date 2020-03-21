@@ -6,6 +6,13 @@ var copyBtn = document.querySelector("#copy");
 
 // Write password to the #password input
 function writePassword() {
+  // Create new variables each time a password is made
+  var lowerCase = false;
+  var upperCase = false;
+  var numeric = false;
+  var specialChar = false;
+  var passwordLength = 0;
+
   // Generate password string
   var password = generatePassword();
   // Locate password text in document
@@ -30,14 +37,6 @@ function copyPassword() {
 generateBtn.addEventListener("click", writePassword);
 // Add event listener to copy button
 copyBtn.addEventListener("click", copyPassword);
-
-
-// Global Variables Declared
-var lowerCase;
-var upperCase;
-var numeric;
-var specialChar;
-var passwordLength;
 
 
 // Prompt user for password criteria 
@@ -80,11 +79,14 @@ var numericArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 var specialCharArray =  specialCharLetters.split("");
 
 // Valid character Array - nested [["upperArray"],["lowerArray"]]
-var validChar = [];
+var validChar;
 
 
 // Check prompts to see which types are valid
 function checkPrompts() {
+  
+  // First set to empty array
+  validChar = [];
 
   // Check if lowercase valid
   if(lowerCase) {
@@ -105,16 +107,16 @@ function checkPrompts() {
 }
 
 
-// Generates the type of digit - "lowerCase" "numeric"
+// Generates the type of digit - "lowerCase"
 function generateRandomType() {
-  // generate a number between 0 and validChar length
+  // Generate a number between 0 and validChar length
   return Math.floor(Math.random() * validChar.length);
 }
 
 
-// Generates the char in type array - "k" 9
+// Generates the char in type array - "k"
 function generateRandomChar(typeIdx) {
-  // generate a number between 0 and typeIdx array length
+  // Generate a number between 0 and typeIdx array length
   return Math.floor(Math.random() * validChar[typeIdx].length);
 }
 
@@ -139,7 +141,7 @@ function makePassword() {
     // Charater for position i
     var randomChar = validChar[typeIdx][charIdx];
 
-    // add element to password
+    // Add element to password
     password.push(randomChar);
 
   }
